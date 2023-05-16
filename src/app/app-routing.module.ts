@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './modules/search/search.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { WordResultComponent } from './modules/search/word-result/word-result.component';
-import { NoSearchComponent } from './modules/search/no-search/no-search.component';
 import { ExampleResultComponent } from './modules/search/example-result/example-result.component';
 
 const routes: Routes = [
@@ -17,7 +16,6 @@ const routes: Routes = [
           { path: 'example/:query', component: ExampleResultComponent }
         ]
       },
-      { path: '', redirectTo: 'search', pathMatch: 'full' },
     ]
   },
   { path: '**', component: NotFoundComponent }

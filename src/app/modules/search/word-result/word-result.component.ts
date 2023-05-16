@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiSearchService } from 'src/app/services/api-search/api-search.service';
+import { ApiSearchService } from 'src/app/services/api/api-search.service';
 import { LanguageService } from 'src/app/services/language.service';
 
 @Component({

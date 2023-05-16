@@ -1,5 +1,5 @@
 .register{
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 60px;
     background-color: #f7f7f7;
     position: relative;
@@ -59,4 +59,11 @@
         }
     }
 
+}
+
+.warning-form{
+    display: inline-block;
+    color: red;
+    font-size: 13px;
+    margin-bottom: 5px;
 }

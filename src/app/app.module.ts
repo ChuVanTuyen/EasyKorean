@@ -12,7 +12,6 @@ import { translateBrowserLoaderFactory } from './loader/translate-browser.loader
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { WordResultComponent } from './modules/search/word-result/word-result.component';
 import { ExampleResultComponent } from './modules/search/example-result/example-result.component';
-import { NoResultComponent } from './modules/search/no-result/no-result.component';
 import { FormsModule } from '@angular/forms';
 import { NoSearchComponent } from './modules/search/no-search/no-search.component';
 import { LoaderComponent } from './views/loader/loader.component';
@@ -26,7 +25,6 @@ import { LoaderComponent } from './views/loader/loader.component';
     NotFoundComponent,
     WordResultComponent,
     ExampleResultComponent,
-    NoResultComponent,
     NoSearchComponent,
     LoaderComponent
   ],

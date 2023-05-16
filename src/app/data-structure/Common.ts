@@ -12,3 +12,11 @@ export interface DataSearch {
     text: string,
     type: string
 }
+
+export interface DataRegister {
+    email: string,
+    password: string,
+    language: string
+}
+
+export const schemeDomain = 'http://localhost:4200/';

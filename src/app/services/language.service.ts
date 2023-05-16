@@ -23,15 +23,15 @@ export class LanguageService {
     this.translate.use('en');
   }
 
-  setLang(l: string): void {
-    this.lang = l;
-    this.translate.use(l);
-    let url = l + this.router.url.slice(3);
+  setLang(lang: string): void {
+    this.lang = lang;
+    this.translate.use(lang);
+    let url = lang + this.router.url.slice(3);
     this.router.navigate([url])
   }
 
-  setLangDefault(l: string): void {
-    this.translate.setDefaultLang(l);
+  setLangDefault(lang: string): void {
+    this.translate.setDefaultLang(lang);
   }
 
   getCurrentLang(): Language | undefined {
@@ -40,5 +40,9 @@ export class LanguageService {
 
   getLangs(): Array<Language> {
     return this.langs;
+  }
+
+  checkLang(lang: string): boolean {
+    return this.langs.some(item => item.code === lang);
   }
 }

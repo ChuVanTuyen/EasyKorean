@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Language } from 'src/app/data-structure/Common';
 import { LanguageService } from 'src/app/services/language.service';
 
@@ -16,11 +16,13 @@ export class HeaderComponent {
   constructor(@Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
+
     if (this.isBrowser) {
       this.keepActive = this.lang.getCurrentLang(); // lấy ngôn ngữ mặc định để hiển thị lần đầu
     }

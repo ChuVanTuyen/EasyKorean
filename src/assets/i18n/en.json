@@ -38,5 +38,12 @@
     "The-kinds": "The kinds",
     "Eg": "Eg",
     "Related-word": "Related word",
-    "No-result": "No result"
+    "No-result": "No result",
+    "The-email-field": "The email field is required",
+    "email-must-valid-email": "The email must be a valid email address.",
+    "The-password-field": "The password field is required",
+    "The-confirm-password-field": "The confirm password field is required",
+    "password-6-characters": "The password must be at least 6 characters",
+    "Match-password": "The confirm password and password must match",
+    "You-agreed-terms-of-use": "You have not agreed to the terms of use"
 }

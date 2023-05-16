@@ -38,5 +38,12 @@
     "The-kinds": "Từ loại",
     "Eg": "Ví dụ",
     "Related-word": "Từ liên quan",
-    "No-result": "Không tìm thấy kết quả"
+    "No-result": "Không tìm thấy kết quả",
+    "The-email-field": "Bạn chưa nhập email",
+    "email-must-valid-email": "Email chưa nhập đúng định dạng",
+    "The-password-field": "Bạn chưa nhập password",
+    "The-confirm-password-field": "Bạn chưa nhập password confirm",
+    "password-6-characters": "Mật khẩu tối thiểu 6 ký tự",
+    "Match-password": "Password và password confirm không trùng khớp",
+    "You-agreed-terms-of-use": "Bạn cần đồng ý các điều khoản sử dụng"
 }
