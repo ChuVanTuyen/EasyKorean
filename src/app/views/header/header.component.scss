@@ -1,0 +1,131 @@
+.header{
+    position: fixed;
+    height: 60px;
+    background-color: var(--primary);
+    color: white;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    left: 0;
+    .content{
+        display: flex;
+        justify-content: space-between;
+        height: 60px;
+        align-items: center;
+    }
+
+    .menu{
+        display: flex;
+    }
+
+    .language{
+        position: relative;
+        display: flex;
+        align-items: center;
+        & > span{
+            display: none;
+        }
+        & > svg{
+            width: 8px;
+            margin-left: 8px;
+            fill: white;
+        }
+        &:hover{
+            cursor: pointer;
+            .set-lang{
+                display: block;
+            }
+        }
+    }
+
+    .set-lang{
+        position: absolute;
+        display: none;
+        color: black;
+        width: 200px;
+        max-height: 500px;
+        overflow-y: auto;
+        right: 0;
+        top: 100%;
+        padding: 6px;
+        background-color: white;
+        border-radius: 3px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 6px #a3a3a3;
+        z-index: 99;
+        .lang{
+            position: relative;
+            padding: 6px 12px;
+            border-bottom: 1px solid #eee;
+            span{
+                margin-left: 12px;
+            }
+            &:hover{
+                cursor: pointer;;
+                border-color: #ccc;
+            }
+            svg{
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                fill: white;
+                fill: #4d80ed;
+            }
+        }
+    }
+
+    .setting{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 14px;
+        svg{
+            fill: white;
+        }
+    }
+    .login, .register{
+        position: relative;
+        a{
+            padding: 6px 12px;
+            margin: 0 16px;
+            color: white;
+            border-radius: 999px;
+        }
+        .active{
+            background-color: #342f82;
+        }
+    }
+    .login::after, .register::after{
+        content: '';
+        position: absolute;
+        height: 16px;
+        width: 1px;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        background-color: white;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header{
+        .login, .register{
+            a{
+                margin: 0;
+            }
+        }
+
+        .active{
+            display: none;
+        }
+
+        .login::after, .register::after{
+            display: none;
+        }
+
+        .setting{
+            margin-left: 0;
+        }
+    }
+    
+}

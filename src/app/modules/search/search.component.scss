@@ -1,0 +1,50 @@
+.search{
+    min-height: 100vh;
+    padding-top: 60px;
+    background-color: #f7f7f7;
+
+    .wrap{
+        padding-top: 16px;
+    }
+
+    .search-input{
+        input{
+            border-top-left-radius: 999px;
+            border-bottom-left-radius: 999px;
+            &:focus{
+                border-color: var(--primary);
+                box-shadow: none;
+            }
+        }
+        button{
+            height: 100%;
+            width: 74px;
+            background-color: var(--primary);
+            border-top-right-radius: 999px;
+            border-bottom-right-radius: 999px;
+            svg{
+                fill: white;
+            }
+        }
+    }
+
+    .btn-groups{
+        .btn{
+            background-color: white;
+            color: #707070;
+            border: 1px solid white;
+        }
+
+        .btn.active{
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+    }
+
+    .btn-groups-link.active{
+        .btn{
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+    }
+}

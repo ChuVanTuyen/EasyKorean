@@ -1,0 +1,55 @@
+.login{
+    height: 100vh;
+    padding-top: 60px;
+    background-color: #f7f7f7;
+    position: relative;
+    .wrap{
+        max-width: 800px;
+        width: 100%;
+        background-color: white;
+        position: relative;
+        padding: 2% 4%;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .login-app{
+        div{
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+
+    .or{
+        margin-top: 20px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+    }
+
+    .email-login{
+        .form-control{
+            border-radius: 999px;
+            display: flex;
+            svg{
+                fill: #757575;
+            }
+        }
+        input[type="text"], input[type="password"]{
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 1%;
+        }
+
+        .btn-submit{
+            border-radius: 999px;
+            width: 100%;
+            background-color: var(--primary);
+            &:hover{
+                background-color: #342f82;
+            }
+        }
+    }
+
+}

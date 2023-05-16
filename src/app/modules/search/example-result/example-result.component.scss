@@ -1,0 +1,68 @@
+.example{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.example{
+    margin-top: 20px;
+}
+
+.pointer{
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.example-box-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.content{
+    p{
+        margin: 5px 0;
+    }
+}
+
+.text-title{
+    color: var(--primary);
+}
+
+.txt-pronounce{
+    color: var(--text-gray);
+}
+
+.volumn{
+    img{
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.show-more{
+    color: var(--color-link);
+    text-align: center;
+    &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.not-found{
+    text-align: center;
+    img{
+        width: 100px;
+        height: 100px;
+        margin: auto;
+    }
+    p{
+        font-size: 18px;
+        margin: 10px 0;
+    }
+}
