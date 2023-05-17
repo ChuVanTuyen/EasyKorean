@@ -20,16 +20,18 @@ export class AppComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(platformId);
   }
   ngOnInit(): void {
-    let url = window.location.href.slice(schemeDomain.length);
-    let lang = url.split('/')[0];
-    if (this.lang.checkLang(lang)) {
-      this.lang.setLang(lang);
-    } else {
-      url = url.slice(lang.length);
-      lang = navigator.language;
-      this.lang.setLang(lang);
-      url = lang + url;
+    if (this.isBrowser) {
+      let url = location.pathname; // /en/search/word/hi
+      let lang = url.split('/')[1]; // en
+      if (this.lang.checkLang(lang)) {
+        this.lang.setLang(lang);
+      } else {
+        url = url.slice(lang.length + 1); // /search/word/hi
+        lang = navigator.language; // vi
+        this.lang.setLang(lang);
+        url = lang + url.slice; // vi/search/word/hi
+      }
+      this.router.navigate([url]);
     }
-    this.router.navigate([url]);
   }
 }

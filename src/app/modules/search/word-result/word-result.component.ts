@@ -25,6 +25,7 @@ export class WordResultComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.total = undefined;
       this.search = params.get('query');
+      this.search = decodeURIComponent(this.search);
       this.dict = '';// Việt Hàn, Hàn Việt, hoặc Anh Hàn, Hàn Anh, ...
       let langCheck = this.search.charCodeAt(0); // lấy mã unicode
       // kiểm tra xem có phải là tiếng Hàn hay không

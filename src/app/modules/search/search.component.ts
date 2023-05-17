@@ -17,8 +17,8 @@ export class SearchComponent implements OnInit {
   }
   search = '';// nội dung tra cứu
   ngOnInit(): void {
-    let search = this.router.url.split('/').pop();
-    if (search?.trim()) {
+    let search = this.router.url.split('/')[3];
+    if (search) {
       this.check.submitted = true;
     }
   }
@@ -43,10 +43,5 @@ export class SearchComponent implements OnInit {
     if (this.search) {
       this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
     }
-  }
-
-  hideNoSearch(): void {
-    this.check.submitted = true;
-    console.log('ok');
   }
 }
