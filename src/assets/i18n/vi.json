@@ -45,5 +45,7 @@
     "The-confirm-password-field": "Bạn chưa nhập password confirm",
     "password-6-characters": "Mật khẩu tối thiểu 6 ký tự",
     "Match-password": "Password và password confirm không trùng khớp",
-    "You-agreed-terms-of-use": "Bạn cần đồng ý các điều khoản sử dụng"
+    "You-agreed-terms-of-use": "Bạn cần đồng ý các điều khoản sử dụng",
+    "email-registered": "Tài khoản email đã được đăng ký",
+    "email-pass-incorrect": "Email hoặc mật khẩu chưa chính xác"
 }

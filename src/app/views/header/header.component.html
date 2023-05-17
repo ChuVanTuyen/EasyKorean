@@ -27,7 +27,7 @@
           </ng-container>
         </div>
 
-        <ng-container *ngIf="keepActive">
+        <ng-container *ngIf="keepActive && !userName">
           <div class="login">
             <a routerLink="{{keepActive.code}}/user/login/" routerLinkActive="active">
               {{'Login' | translate}}
@@ -39,7 +39,11 @@
             </a>
           </div>
         </ng-container>
-
+        <ng-container *ngIf=userName>
+          <div class="userName">
+            {{userName}}
+          </div>
+        </ng-container>
         <div class="setting">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path

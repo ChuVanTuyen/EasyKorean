@@ -67,6 +67,8 @@
         </label>
       </div>
       <span class="warning-form" *ngIf="!user.agree">{{'You-agreed-terms-of-use' | translate}}</span>
+      <span class="warning-form" *ngIf="res !== undefined && res.status === 0">
+        {{'email-registered' | translate}}</span>
       <button type="submit" class="btn btn-primary mt-3 btn-submit">{{'login' | translate}}</button>
     </form>
   </div>

@@ -19,4 +19,10 @@ export interface DataRegister {
     language: string
 }
 
+export interface DataLogin {
+    email: string,
+    password: string,
+    device_id: string
+}
+
 export const schemeDomain = 'http://localhost:4200/';

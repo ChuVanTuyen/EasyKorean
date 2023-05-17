@@ -16,6 +16,7 @@ const routes: Routes = [
           { path: 'example/:query', component: ExampleResultComponent }
         ]
       },
+      { path: '', redirectTo: 'search', pathMatch: 'full' }
     ]
   },
   { path: '**', component: NotFoundComponent }

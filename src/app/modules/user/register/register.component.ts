@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiRegisterService } from 'src/app/services/api/api-register.service';
+import { ApiUserService } from 'src/app/services/api/api-user.service';
 import { LanguageService } from 'src/app/services/language.service';
 
 interface UserFormData {
@@ -22,14 +22,11 @@ export class RegisterComponent implements OnInit {
     agree: true,
   };
   checkEmailForm = true; // kiểm tra mail đã đúng định dạng hay chưa
-  message: any;
+  res: any;
 
-  constructor(private apiRegister: ApiRegisterService, private lang: LanguageService) { }
+  constructor(private apiUser: ApiUserService, private lang: LanguageService) { }
 
   ngOnInit(): void {
-    if (this.user.email) {
-      console.log(this.user);
-    }
   }
 
   onRegister(userData: UserFormData): void {
@@ -38,13 +35,13 @@ export class RegisterComponent implements OnInit {
     if (!this.checkEmailForm || this.user.password.length < 6 || this.user.password !== this.user.rePassword) {
       return;
     }
-    this.apiRegister.register({// đăng ký lên serve
+    this.apiUser.register({// đăng ký lên serve
       email: this.user.email,
       password: this.user.password,
       language: this.lang.lang
-    }).subscribe(data => {
-      this.message = data;
-      console.log(this.message);
+    }).subscribe(res => {
+      this.res = res;
+      console.log(this.res);
     });
   }
 

@@ -1,8 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Language } from 'src/app/data-structure/Common';
 import { LanguageService } from 'src/app/services/language.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -13,18 +13,22 @@ export class HeaderComponent {
   keepActive: Language | undefined; // đang hiển thị ngôn ngữ nào
   navigatorLang = 'en'; // ngôn ngữ mặc định
   isBrowser = false; // kiểm tra có đang chạy trong môi trường browser hay không
+  userName = '';
   constructor(@Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private localStorage: LocalStorageService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
-
+    // this.localStorage.clear();
     if (this.isBrowser) {
       this.keepActive = this.lang.getCurrentLang(); // lấy ngôn ngữ mặc định để hiển thị lần đầu
+      let data = this.localStorage.getItem('user');
+      if (data) {
+        this.userName = data.name;
+      }
     }
   }
 

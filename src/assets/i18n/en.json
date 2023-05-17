@@ -45,5 +45,7 @@
     "The-confirm-password-field": "The confirm password field is required",
     "password-6-characters": "The password must be at least 6 characters",
     "Match-password": "The confirm password and password must match",
-    "You-agreed-terms-of-use": "You have not agreed to the terms of use"
+    "You-agreed-terms-of-use": "You have not agreed to the terms of use",
+    "email-registered": "The email account has already been registered",
+    "email-pass-incorrect": "The email or password is incorrect"
 }

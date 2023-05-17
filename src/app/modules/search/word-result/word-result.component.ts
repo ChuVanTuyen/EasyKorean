@@ -25,7 +25,6 @@ export class WordResultComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.total = undefined;
       this.search = params.get('query');
-      this.search = decodeURIComponent(this.search); // giải mã url encode
       this.dict = '';// Việt Hàn, Hàn Việt, hoặc Anh Hàn, Hàn Anh, ...
       let langCheck = this.search.charCodeAt(0); // lấy mã unicode
       // kiểm tra xem có phải là tiếng Hàn hay không
@@ -68,7 +67,6 @@ export class WordResultComponent implements OnInit {
       (data: any) => {
         if (this.total !== undefined && this.total > (this.page - 1) * 20) {
           this.result = [... this.result, ...data.data.result];
-          console.log(this.result);
         }
       }
     );

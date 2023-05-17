@@ -14,8 +14,6 @@ export class AppComponent implements OnInit {
   isBrowser = false;
   constructor(@Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
-    private router: Router,
-    private route: ActivatedRoute,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }

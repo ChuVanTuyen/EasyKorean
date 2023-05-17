@@ -19,8 +19,9 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     let search = this.router.url.split('/')[4];
     if (search) {
-      this.search = search;
+      this.search = decodeURIComponent(decodeURIComponent(search));
       this.check.submitted = true;
+      this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
     }
   }
   handleTypeSearch(type: boolean) {

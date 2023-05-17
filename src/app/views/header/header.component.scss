@@ -95,7 +95,13 @@
             background-color: #342f82;
         }
     }
-    .login::after, .register::after{
+
+    .userName{
+        padding: 0 16px;
+        position: relative;
+    }
+
+    .login::after, .register::after, .userName::after{
         content: '';
         position: absolute;
         height: 16px;
@@ -105,6 +111,7 @@
         transform: translateY(-50%);
         background-color: white;
     }
+
 }
 
 @media screen and (max-width: 576px) {
