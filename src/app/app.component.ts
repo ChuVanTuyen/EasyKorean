@@ -26,12 +26,9 @@ export class AppComponent implements OnInit {
       if (this.lang.checkLang(lang)) {
         this.lang.setLang(lang);
       } else {
-        url = url.slice(lang.length + 1); // /search/word/hi
         lang = navigator.language; // vi
         this.lang.setLang(lang);
-        url = lang + url.slice; // vi/search/word/hi
       }
-      this.router.navigate([url]);
     }
   }
 }

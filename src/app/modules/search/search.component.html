@@ -2,7 +2,7 @@
   <div class="container wrap">
     <form (ngSubmit)="onSubmit()" #ngForm>
       <div class="input-group mb-3 search-input">
-        <input type="text" class="form-control" (keyup)="handleChangeSearch($event)"
+        <input type="text" class="form-control" value="{{search}}" (keyup)="handleChangeSearch($event)"
           placeholder="{{'Search' | translate}}">
         <div class="input-group-append">
           <button type="submit">

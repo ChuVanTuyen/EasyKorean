@@ -26,7 +26,7 @@ export class LanguageService {
   setLang(lang: string): void {
     this.lang = lang;
     this.translate.use(lang);
-    let url = lang + this.router.url.slice(3);
+    let url = lang + location.pathname.slice(3);
     this.router.navigate([url])
   }
 

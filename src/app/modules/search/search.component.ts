@@ -17,8 +17,9 @@ export class SearchComponent implements OnInit {
   }
   search = '';// nội dung tra cứu
   ngOnInit(): void {
-    let search = this.router.url.split('/')[3];
+    let search = this.router.url.split('/')[4];
     if (search) {
+      this.search = search;
       this.check.submitted = true;
     }
   }
