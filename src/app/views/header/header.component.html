@@ -1,7 +1,13 @@
 <header class="header">
   <div class="container wrap">
     <div class="content">
-      <div class="logo">easy<span>Korean</span></div>
+      <div class="logo">
+        <ng-container *ngIf="keepActive">
+          <a routerLink="{{keepActive.code}}">
+            easy<span>Korean</span>
+          </a>
+        </ng-container>
+      </div>
       <div class="menu">
         <div class="language">
           <ng-container *ngIf="keepActive">
@@ -65,6 +71,12 @@
         </div>
       </div>
 
+      <ng-container *ngIf="LogoutOrRegister">
+        <div class="notification notification--success">
+          <div class="title">Thành công</div>
+          <div class="description">{{LogoutOrRegister}} thành công</div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </header>

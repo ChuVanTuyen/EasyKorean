@@ -12,7 +12,8 @@ import { isPlatformBrowser } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'EasyKorean';
   isBrowser = false;
-  constructor(@Inject(PLATFORM_ID) platformId: Object,
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);

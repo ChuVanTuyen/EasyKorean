@@ -17,9 +17,10 @@ export interface DataLogout {
 
 export interface User {
     id: number,
-    name: string,
     email: string,
-    image: string | null,
+    name: string,
+    password: string,
+    image: string,
     device_id: string,
     remember_token: string
 }

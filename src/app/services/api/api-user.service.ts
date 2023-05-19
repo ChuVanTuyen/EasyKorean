@@ -24,8 +24,8 @@ export class ApiUserService {
         catchError((err) => { return of(err) }),
       );
   }
-  logout(dataSend: any, headers: any): Observable<any> {
-    return this.http.post<any>(this.url.urlLogout, headers, dataSend)
+  logout(dataSend: DataLogout, headers: any): Observable<any> {
+    return this.http.post<any>(this.url.urlLogout, dataSend, headers)
       .pipe(
         catchError((err) => { return of(err) }),
       )

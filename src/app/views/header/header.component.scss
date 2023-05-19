@@ -1,3 +1,15 @@
+@keyframes show {
+    0%{
+        visibility: visible;
+        opacity: 1;
+    } 
+
+    100%{
+        visibility: hidden;
+        opacity: 1;
+    }
+}
+
 .header{
     position: fixed;
     height: 60px;
@@ -7,8 +19,19 @@
     top: 0;
     right: 0;
     left: 0;
+    .logo{
+        a{
+            color: white;
+            text-transform: uppercase;
+            font-style: italic;
+            span{
+                font-size: 24px;
+            }
+        }
+    }
     .content{
         display: flex;
+        position: relative;
         justify-content: space-between;
         height: 60px;
         align-items: center;
@@ -153,6 +176,45 @@
         right: 0;
         transform: translateY(-50%);
         background-color: white;
+    }
+
+    .notification{
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        max-width: 350px;
+        right: 45px;
+        top: 30%;
+        border: 1px solid rgba(0,0,0,.1);
+        border-radius: 3px;
+        box-shadow: 0 0.25rem 0.75rem #0000001a;
+        transition: opacity .15s linear;
+        font-size: 14px;
+        animation-name: show;
+        animation-duration: 4s;
+        .title{
+            padding: 5px 20px;
+            font-weight: bold;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .description{
+            padding: 10px 20px;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    }
+
+    .notification--success{
+        font-size: 14px;
+        .title{
+            background-color: var(--bg-success);
+            color: white;
+        }
+        .description{
+            background-color: var(--bg-success-light);
+            color: #155724;
+        }
     }
 
 }

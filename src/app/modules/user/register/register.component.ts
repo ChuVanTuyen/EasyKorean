@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiUserService } from 'src/app/services/api/api-user.service';
+import { BroadcastService } from 'src/app/services/broadcast.service';
 import { LanguageService } from 'src/app/services/language.service';
 
 interface UserFormData {
@@ -24,7 +26,12 @@ export class RegisterComponent implements OnInit {
   checkEmailForm = true; // kiểm tra mail đã đúng định dạng hay chưa
   res: any;
 
-  constructor(private apiUser: ApiUserService, private lang: LanguageService) { }
+  constructor(
+    private apiUser: ApiUserService,
+    private lang: LanguageService,
+    private router: Router,
+    private broadCaster: BroadcastService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -41,7 +48,22 @@ export class RegisterComponent implements OnInit {
       language: this.lang.lang
     }).subscribe(res => {
       this.res = res;
-      console.log(this.res);
+      if (res.status === 1) {
+        this.broadCaster.broadcast('user', { // gửi dữ liệu đến component header
+          user: {
+            id: res.id,
+            email: this.user.email,
+            name: res.name,
+            password: this.user.password,
+            image: res.image,
+            device_id: this.makeid(8),
+            remember_token: res.remember_token
+          },
+          LogoutOrRegister: "Register",
+        })
+        this.router.navigate([this.lang.lang]);
+      }
+      console.log(res);
     });
   }
 
@@ -69,5 +91,15 @@ export class RegisterComponent implements OnInit {
     else {
       this.checkEmailForm = false;
     }
+  }
+
+  makeid(length: number) {// random chuỗi device_id
+    let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < length; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
   }
 }

@@ -15,17 +15,17 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class HeaderComponent {
   keepActive: Language | undefined; // đang hiển thị ngôn ngữ nào
-  navigatorLang = 'en'; // ngôn ngữ mặc định
   isBrowser = false; // kiểm tra có đang chạy trong môi trường browser hay không
-  user: User = {
-    id: -1,
-    name: '',
+  user = {
+    id: NaN,
     email: '',
-    image: null,
+    name: '',
+    password: '',
+    image: '',
     device_id: '',
     remember_token: ''
   };
-  // user$: Observable<User>;
+  LogoutOrRegister = "";
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
@@ -37,15 +37,16 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    // this.localStorage.clear();
+    this.localStorage.clear();
     if (this.isBrowser) {
       this.keepActive = this.lang.getCurrentLang(); // lấy ngôn ngữ mặc định để hiển thị lần đầu
       let data = this.localStorage.getItem('user');
       if (data) {
         this.user = data;
       } else {
-        this.broadCaster.on<User>('user').subscribe((data) => {
-          this.user = data;
+        this.broadCaster.on<any>('user').subscribe((data) => {
+          this.user = data.user;
+          this.LogoutOrRegister = data.LogoutOrRegister;
         });
       }
     }
@@ -56,18 +57,29 @@ export class HeaderComponent {
     this.lang.setLang(this.keepActive.code);// thay đổi ngôn ngữ
   }
 
-  handleLogout(): void {
-    this.apiUser.logout({
-      headers: {
-        authorization: this.user.remember_token
-      }
-    },
+  handleLogout(): void {// đăng xuất
+    this.apiUser.logout(
       {
+        device_id: this.user.device_id,
         type: "all"
+      },
+      {
+        headers: {
+          authorization: this.user.remember_token
+        }
       }
-    )
-      .subscribe((data) => {
-        console.log(data);
-      })
+    ).subscribe((data) => {
+      if (data.status === 0) {
+        console.error("Đăng xuất thất bại");
+      } else {
+        this.user.id = NaN;
+        this.user.name = '';
+        this.user.device_id = '';
+        this.user.remember_token = '';
+        this.user.image = '';
+        this.LogoutOrRegister = "Đăng xuất";
+        this.localStorage.setItem('user', this.user);
+      }
+    })
   }
 }
