@@ -96,12 +96,55 @@
         }
     }
 
-    .userName{
+    .user{
         padding: 0 16px;
         position: relative;
+        &:hover{
+            cursor: pointer;
+            .user-menu{
+                display: block;
+            }
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            background-color: transparent;
+            top: 95%;
+            left: 0;
+            right: 0;
+            height: 20px;
+        }
+    }
+    
+    .user-image{
+        width: 24px;
+        margin-right: 5px;
+        display: inline-block;
+        img{
+            width: 100%;
+        }
     }
 
-    .login::after, .register::after, .userName::after{
+    .user-menu{
+        position: absolute;
+        display: none;
+        top: 120%;
+        right: 0;
+        background-color: white;
+        color: black;
+        padding: 5px 15px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #0003;
+        width: 200px;
+        .user-item{
+            padding: 5px;
+            &:hover{
+                color: var(--primary);
+            }
+        }
+    }
+
+    .login::after, .register::after, .user::after{
         content: '';
         position: absolute;
         height: 16px;

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, catchError, of } from 'rxjs';
 import { UrlService } from './url.service';
-import { DataLogin, DataRegister } from 'src/app/data-structure/Common';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { DataLogin, DataLogout, DataRegister } from 'src/app/data-structure/User';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,11 @@ export class ApiUserService {
       .pipe(
         catchError((err) => { return of(err) }),
       );
+  }
+  logout(dataSend: any, headers: any): Observable<any> {
+    return this.http.post<any>(this.url.urlLogout, headers, dataSend)
+      .pipe(
+        catchError((err) => { return of(err) }),
+      )
   }
 }

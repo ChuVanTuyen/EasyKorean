@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DataLogin } from 'src/app/data-structure/Common';
 import { ApiUserService } from 'src/app/services/api/api-user.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
 import { LanguageService } from 'src/app/services/language.service';
+import { BroadcastService } from 'src/app/services/broadcast.service';
 
 interface DataFormUser {
   email: string,
@@ -28,6 +28,7 @@ export class LoginComponent {
     private localStorage: LocalStorageService,
     private router: Router,
     private lang: LanguageService,
+    private broadCaster: BroadcastService
   ) { }
   handleLogin(data: DataFormUser): void {
     this.user = data;
@@ -47,10 +48,22 @@ export class LoginComponent {
       if (res.status === 1) {
         if (data.agree) {
           this.localStorage.setItem('user', {
+            id: res.id,
             email: data.email,
-            name: res.name
+            name: res.name,
+            image: res.image,
+            device_id: "ABC-EDF-212-23DSnjsaxnaj",
+            remember_token: res.remember_token
           })
         }
+        this.broadCaster.broadcast('user', {
+          id: res.id,
+          email: data.email,
+          name: res.name,
+          image: res.image,
+          device_id: "ABC-EDF-212-23DSnjsaxnaj",
+          remember_token: res.remember_token
+        })
         this.router.navigate([this.lang.lang]);
       }
     });

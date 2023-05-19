@@ -27,7 +27,7 @@
           </ng-container>
         </div>
 
-        <ng-container *ngIf="keepActive && !userName">
+        <ng-container *ngIf="keepActive && !user.name">
           <div class="login">
             <a routerLink="{{keepActive.code}}/user/login/" routerLinkActive="active">
               {{'Login' | translate}}
@@ -39,9 +39,21 @@
             </a>
           </div>
         </ng-container>
-        <ng-container *ngIf=userName>
-          <div class="userName">
-            {{userName}}
+        <ng-container *ngIf="user.name">
+          <div class="user">
+            <div class="user-image">
+              <ng-container *ngIf="user.image; else ngUserImage">
+                <img src="{{user.image}}" alt="">
+              </ng-container>
+              <ng-template #ngUserImage>
+                <img src="assets/images/icon/ic_user.png" alt="">
+              </ng-template>
+            </div>
+            <span>{{user.name}}</span>
+            <div class="user-menu">
+              <div class="user-item">{{'Thông tin cá nhân' | translate}}</div>
+              <div class="user-item" (click)="handleLogout()">{{'Đăng xuất' | translate}}</div>
+            </div>
           </div>
         </ng-container>
         <div class="setting">
