@@ -25,7 +25,7 @@ export class HeaderComponent {
     device_id: '',
     remember_token: ''
   };
-  LogoutOrRegister = "";
+  logoutOrRegister = "";
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
@@ -37,18 +37,18 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.localStorage.clear();
     if (this.isBrowser) {
       this.keepActive = this.lang.getCurrentLang(); // lấy ngôn ngữ mặc định để hiển thị lần đầu
       let data = this.localStorage.getItem('user');
       if (data) {
         this.user = data;
-      } else {
-        this.broadCaster.on<any>('user').subscribe((data) => {
-          this.user = data.user;
-          this.LogoutOrRegister = data.LogoutOrRegister;
-        });
       }
+      this.broadCaster.on<any>('user').subscribe((data) => {
+
+        this.user = data.user;
+        this.localStorage.setItem('user', this.user);
+        this.logoutOrRegister = data.logoutOrRegister;
+      });
     }
   }
 
@@ -61,7 +61,6 @@ export class HeaderComponent {
     this.apiUser.logout(
       {
         device_id: this.user.device_id,
-        type: "all"
       },
       {
         headers: {
@@ -77,7 +76,7 @@ export class HeaderComponent {
         this.user.device_id = '';
         this.user.remember_token = '';
         this.user.image = '';
-        this.LogoutOrRegister = "Đăng xuất";
+        this.logoutOrRegister = "Sign-out";
         this.localStorage.setItem('user', this.user);
       }
     })

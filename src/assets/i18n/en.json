@@ -47,5 +47,21 @@
     "Match-password": "The confirm password and password must match",
     "You-agreed-terms-of-use": "You have not agreed to the terms of use",
     "email-registered": "The email account has already been registered",
-    "email-pass-incorrect": "The email or password is incorrect"
+    "email-pass-incorrect": "The email or password is incorrect",
+    "Profile": "Profile",
+    "Logout": "Logout",
+    "Success": "Success",
+    "Registered": "Registered",
+    "successfully": "successfully",
+    "Sign-out": "Sign out",
+    "Introduction": "Introduction",
+    "Policy": "Policy",
+    "Terms": "Terms",
+    "Email-contact": "Email",
+    "Other-Apps": "Other Apps",
+    "Practice-reading-Chinese": "Practice reading Chinese",
+    "Practice-reading-Japanese": "Practice reading Japanese",
+    "English-dictionary": "English dictionary",
+    "Chinese-dictionary": "Chinese dictionary",
+    "Get-the-app": "Get the app"
 }

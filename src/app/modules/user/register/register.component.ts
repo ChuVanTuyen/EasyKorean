@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
             device_id: this.makeid(8),
             remember_token: res.remember_token
           },
-          LogoutOrRegister: "Register",
+          LogoutOrRegister: "Registered",
         })
         this.router.navigate([this.lang.lang]);
       }
@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
     }
     if (type === 1) {// đỏ khi người dùng nhập mật khẩu
       this.user.password = (event.target as HTMLInputElement).value;
+      this.user.rePassword = (event.target as HTMLInputElement).value;
     }
     if (type === 2) {
       this.user.rePassword = (event.target as HTMLInputElement).value;

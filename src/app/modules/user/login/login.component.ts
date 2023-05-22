@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   user = {
     email: '',
     password: '',
-    agree: true,
+    agree: false,
   };
   isBrowser = false;
   constructor(
@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
 
   handleLogin(data: DataFormUser): void {
     this.user = data;
+    let email = '';
+    let password = '';
     if (!data.email) {
       return;
     }
@@ -64,40 +66,22 @@ export class LoginComponent implements OnInit {
       device_id: did
     }).subscribe(res => {
       this.res = res;
-      console.log(res);
       if (res.status === 1) {
         if (data.agree) {// lưu tài khoản vè mật khẩu
-          this.localStorage.setItem('user', {
-            id: res.id,
-            email: data.email,
-            name: res.name,
-            password: data.password,
-            image: res.image,
-            device_id: did,
-            remember_token: res.remember_token
-          })
-        } else { // không lưu tài khoản và mật khẩu
-          this.localStorage.setItem('user', {
-            id: res.id,
-            email: '',
-            name: res.name,
-            password: '',
-            image: res.image,
-            device_id: did,
-            remember_token: res.remember_token
-          })
+          email = data.email;
+          password = data.password;
         }
-        this.broadCaster.broadcast('user', { // gửi dữ liệu đến component header
+        this.broadCaster.broadcast('user', {
           user: {
             id: res.id,
-            email: data.email,
+            email: email,
             name: res.name,
-            password: data.password,
+            password: password,
             image: res.image,
-            device_id: did,
+            device_id: this.makeid(8),
             remember_token: res.remember_token
           },
-          LogoutOrRegister: "",
+          logoutOrRegister: ""
         })
         this.router.navigate([this.lang.lang]);
       }

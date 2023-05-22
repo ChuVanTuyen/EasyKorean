@@ -20,7 +20,7 @@
               <ng-container *ngFor="let lang of lang.langs">
                 <div class="lang" (click)="setLanguge(lang)">
                   <img src="{{lang.img}}" alt="">
-                  <span>{{lang.name}}</span>
+                  <span>{{lang.name | translate}}</span>
                   <ng-container *ngIf="keepActive.id === lang.id">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                       <path
@@ -71,10 +71,10 @@
         </div>
       </div>
 
-      <ng-container *ngIf="LogoutOrRegister">
+      <ng-container *ngIf="logoutOrRegister">
         <div class="notification notification--success">
-          <div class="title">Thành công</div>
-          <div class="description">{{LogoutOrRegister}} thành công</div>
+          <div class="title">{{'Success' | translate}}</div>
+          <div class="description">{{logoutOrRegister | translate}} {{'successfully' | translate}}</div>
         </div>
       </ng-container>
     </div>

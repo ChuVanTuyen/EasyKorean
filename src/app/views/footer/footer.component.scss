@@ -1,0 +1,133 @@
+.footer{
+    color: #474747;
+    margin-top: 60px;
+    padding-top: 24px;
+    background-color: white;
+    p{
+        margin: 0;
+    }
+
+    .box-left{
+        display: flex;
+    }
+
+    .footer-logo{
+        width: 60px;
+        height: 60px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        color: #fff;
+        font-size: .5em;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        margin-right: 20px;
+        div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h6{
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 800;
+            transform: scaleY(1.4);
+        }
+    }
+    .contact{
+        flex: 1;
+    }
+    .list-contact{
+        width: 100%;
+        a{
+            display: block;
+            color: #474747;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .download-other{
+        padding: 0 15px;   
+    }
+
+    .download-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .title{
+        margin-bottom: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #474747;
+    }
+
+    .box-download-cust{
+        display: flex;
+        align-items: center;
+        padding: 4px 8px;
+        width: 217px;
+        border-radius: 5px;
+        color: #666;
+        box-shadow: #0000000d 0 0 0 1px;
+        margin: 5px 0;
+        &:hover{
+            box-shadow: #707070 0 0 0 1px;
+        }
+        img{
+            width: 32px;
+            height: 32px;
+        }
+        small{
+            font-size: 12px;
+        }
+        p{
+            margin-top: -6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .box-download-content{
+            padding-left: 10px;
+        }
+    }
+
+    .download-app{
+        img{
+            width: 120px;
+        }
+    }
+
+    .source-web{
+        border-top: 1px solid #dee2e6;
+        padding: 5px 0;
+        margin-top: 10px;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        a{
+            color: #306f76;
+            font-weight: bold;
+        }
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .box-left{
+        .footer-logo{
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+        flex-direction: column;
+        align-items: center;
+        .contact{
+            text-align: center;
+        }
+    }
+}
