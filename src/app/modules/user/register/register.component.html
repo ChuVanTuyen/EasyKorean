@@ -25,8 +25,9 @@
           <input type="text" name="email" ngModel placeholder="{{'enter-your-email' | translate}}" autocomplete="on"
             (keyup)="removeWarnForm($event, 0)">
         </div>
-        <span class="warning-form" *ngIf="!user.email">{{'The-email-field' | translate}}</span>
-        <span class="warning-form" *ngIf="user.email && !checkEmailForm">{{'email-must-valid-email' | translate}}</span>
+        <span class="warning-form" *ngIf="!user.email && checkSubmit">{{'The-email-field' | translate}}</span>
+        <span class="warning-form" *ngIf="user.email && !checkEmailForm && checkSubmit">{{'email-must-valid-email' |
+          translate}}</span>
       </div>
 
       <div class="form-group mb-2">
@@ -38,8 +39,8 @@
           <input type="password" name="password" ngModel placeholder="{{'password' | translate}}" autocomplete="on"
             (keyup)="removeWarnForm($event, 1)">
         </div>
-        <span class="warning-form" *ngIf="!user.password">{{'The-password-field' | translate}}</span>
-        <span class="warning-form" *ngIf="user.password && !(user.password.length >= 6)">
+        <span class="warning-form" *ngIf="!user.password && checkSubmit">{{'The-password-field' | translate}}</span>
+        <span class="warning-form" *ngIf="user.password && user.password.length < 6 && checkSubmit">
           {{'password-6-characters' | translate}}</span>
       </div>
 
@@ -52,8 +53,9 @@
           <input type="password" name="rePassword" ngModel placeholder="{{'re-enter-your-password' | translate}}"
             autocomplete="on" (keyup)="removeWarnForm($event, 2)">
         </div>
-        <span class="warning-form" *ngIf="!user.rePassword">{{'The-confirm-password-field' | translate}}</span>
-        <span class="warning-form" *ngIf="user.rePassword && !(user.rePassword === user.password)">
+        <span class="warning-form" *ngIf="!user.rePassword && checkSubmit">{{'The-confirm-password-field' |
+          translate}}</span>
+        <span class="warning-form" *ngIf="user.rePassword && !(user.rePassword === user.password) && checkSubmit">
           {{'Match-password' |translate}}
         </span>
       </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiUserService } from 'src/app/services/api/api-user.service';
+import { UserService } from 'src/app/services/user.service';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { LanguageService } from 'src/app/services/language.service';
 
@@ -25,9 +25,9 @@ export class RegisterComponent implements OnInit {
   };
   checkEmailForm = true; // kiểm tra mail đã đúng định dạng hay chưa
   res: any;
-
+  checkSubmit = false;
   constructor(
-    private apiUser: ApiUserService,
+    private apiUser: UserService,
     private lang: LanguageService,
     private router: Router,
     private broadCaster: BroadcastService
@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister(userData: UserFormData): void {
     this.user = userData;
+    this.checkSubmit = true;
     this.validateEmail(this.user.email);
     if (!this.checkEmailForm || this.user.password.length < 6 || this.user.password !== this.user.rePassword) {
       return;
@@ -67,14 +68,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  removeWarnForm(event: Event, type: number): void {// kiểm tra cảnh báo đỏ khi người dùng nhập
+  removeWarnForm(event: Event, type: number): void {// kiểm tra cảnh báo khi người dùng nhập
     if (type === 0) {// khi người dùng nhập email
       this.user.email = (event.target as HTMLInputElement).value;
       this.validateEmail(this.user.email);
     }
-    if (type === 1) {// đỏ khi người dùng nhập mật khẩu
+    if (type === 1) {// khi người dùng nhập mật khẩu
       this.user.password = (event.target as HTMLInputElement).value;
-      this.user.rePassword = (event.target as HTMLInputElement).value;
     }
     if (type === 2) {
       this.user.rePassword = (event.target as HTMLInputElement).value;

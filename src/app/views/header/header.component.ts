@@ -3,7 +3,7 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Language } from 'src/app/data-structure/Common';
 import { User } from 'src/app/data-structure/User';
-import { ApiUserService } from 'src/app/services/api/api-user.service';
+import { UserService } from 'src/app/services/user.service';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -31,7 +31,7 @@ export class HeaderComponent {
     public lang: LanguageService,
     private localStorage: LocalStorageService,
     private broadCaster: BroadcastService,
-    private apiUser: ApiUserService
+    private UserService: UserService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -58,7 +58,7 @@ export class HeaderComponent {
   }
 
   handleLogout(): void {// đăng xuất
-    this.apiUser.logout(
+    this.UserService.logout(
       {
         device_id: this.user.device_id,
       },

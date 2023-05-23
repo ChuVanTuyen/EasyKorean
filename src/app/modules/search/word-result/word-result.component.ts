@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiSearchService } from 'src/app/services/api/api-search.service';
+import { SearchService } from 'src/app/services/search.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-word-result',
@@ -18,36 +19,39 @@ export class WordResultComponent implements OnInit {
   keepActive = 0;
   constructor(
     private route: ActivatedRoute,
-    private apiSearch: ApiSearchService,
-    private lang: LanguageService
+    private searchService: SearchService,
+    private lang: LanguageService,
+    private common: CommonService
   ) { }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.total = undefined;
       this.search = params.get('query');
-      this.dict = '';// Việt Hàn, Hàn Việt, hoặc Anh Hàn, Hàn Anh, ...
-      let langCheck = this.search.charCodeAt(0); // lấy mã unicode
-      // kiểm tra xem có phải là tiếng Hàn hay không
-      if (langCheck > 4352 && langCheck < 4607 || langCheck > 12592 && langCheck < 12687 || langCheck > 44032 && langCheck < 55203) {
-        this.dict = `ko${this.lang.lang}`;
-      } else {
-        this.dict = `${this.lang.lang}ko`;
-      }
-      this.apiSearch.getSearch({
-        dict: this.dict,
-        limit: 20,
-        page: this.page,
-        text: this.search,
-        type: 'word'
-      }).subscribe(
-        (data: any) => {
-          this.total = data.data.total;
-          if (this.total) {
-            this.result = data.data.result;
-          }
-        }
-      );
+      this.getDataSearch();
     })
+  }
+
+  getDataSearch(): void { // lấy dữ liệu từ server
+    if (this.common.checkKoreanString(this.search)) {
+      this.dict = `ko${this.lang.lang}`;
+    } else {
+      this.dict = `${this.lang.lang}ko`;
+    }
+    this.searchService.getSearch({
+      dict: this.dict,
+      limit: 20,
+      page: this.page,
+      text: this.search,
+      type: 'word'
+    }).subscribe(
+      (data: any) => {
+        this.total = data.data.total;
+        if (this.total !== undefined && this.total > 0) {
+          this.result = data.data.result;
+          this.pageTotal = Math.round(this.total / 20);
+        }
+      }
+    );
   }
 
   changeActive(active: number) {
@@ -57,7 +61,7 @@ export class WordResultComponent implements OnInit {
 
   onShowMore() {
     this.page++;
-    this.apiSearch.getSearch({
+    this.searchService.getSearch({
       dict: this.dict,
       limit: 20,
       page: this.page,

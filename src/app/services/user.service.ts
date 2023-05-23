@@ -7,7 +7,7 @@ import { DataLogin, DataLogout, DataRegister } from 'src/app/data-structure/User
 @Injectable({
   providedIn: 'root'
 })
-export class ApiUserService {
+export class UserService {
 
   constructor(private http: HttpClient, private url: UrlService) { }
 

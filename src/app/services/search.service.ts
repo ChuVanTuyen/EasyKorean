@@ -8,7 +8,7 @@ import { DataSearch } from 'src/app/data-structure/Common';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiSearchService {
+export class SearchService {
   constructor(private http: HttpClient, private url: UrlService) { }
 
   getSearch(dataSend: DataSearch): Observable<any> {

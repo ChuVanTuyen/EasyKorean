@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ApiUserService } from 'src/app/services/api/api-user.service';
+import { UserService } from 'src/app/services/user.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { isPlatformBrowser } from '@angular/common';
+import { CommonService } from 'src/app/services/common.service';
 
 interface DataFormUser {
   email: string,
@@ -27,12 +28,13 @@ export class LoginComponent implements OnInit {
     agree: false,
   };
   isBrowser = false;
+  checkEmailForm = true;
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
-    private apiUser: ApiUserService,
-    private localStorage: LocalStorageService,
+    private apiUser: UserService,
     private router: Router,
     private lang: LanguageService,
+    private common: CommonService,
     private broadCaster: BroadcastService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -40,36 +42,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      let u = this.localStorage.getItem('user');
-      if (u) {
-        this.user.email = u.email;
-        this.user.password = u.password;
-      }
 
     }
   }
 
-  handleLogin(data: DataFormUser): void {
-    this.user = data;
+  handleLogin(): void {
     let email = '';
     let password = '';
-    if (!data.email) {
+    this.checkSubmit = true;
+    if (!this.checkEmailForm) {
       return;
     }
-    if (!data.password) {
+    if (!this.user.password) {
       return;
     }
-    let did = this.makeid(8);// tạo device_id
+    let did = this.common.makeid(8);// tạo device_id
     this.apiUser.login({
-      email: data.email,
-      password: data.password,
+      email: this.user.email,
+      password: this.user.password,
       device_id: did
     }).subscribe(res => {
       this.res = res;
       if (res.status === 1) {
-        if (data.agree) {// lưu tài khoản vè mật khẩu
-          email = data.email;
-          password = data.password;
+        if (this.user.agree) {// lưu tài khoản vè mật khẩu
+          email = this.user.email;
+          password = this.user.password;
         }
         this.broadCaster.broadcast('user', {
           user: {
@@ -78,7 +75,7 @@ export class LoginComponent implements OnInit {
             name: res.name,
             password: password,
             image: res.image,
-            device_id: this.makeid(8),
+            device_id: did,
             remember_token: res.remember_token
           },
           logoutOrRegister: ""
@@ -88,13 +85,23 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  makeid(length: number) {// random chuỗi device_id
-    let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  onFocusout(type: number): void {
+    //type = 0 là focus input email, 1 focus input password
+    if (type === 0) {
+      this.checkEmailForm = this.common.validateEmail(this.user.email);
+    }
 
-    for (var i = 0; i < length; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
   }
+
+  onFocus(type: number): void {// xóa thông bảo tk hoặc mk 
+    //type = 0 là focus input email, 1 focus input password
+    if (type === 0) {
+      this.checkEmailForm = true;
+    }
+    if (this.res) {
+      this.res.status = 1;
+    }
+  }
+
+
 }
