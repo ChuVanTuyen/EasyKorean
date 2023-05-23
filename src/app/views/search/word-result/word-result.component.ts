@@ -17,12 +17,15 @@ export class WordResultComponent implements OnInit {
   pageTotal = 1; // số lần load tính cả lần load đầu tiên
   dict = '';// Việt Hàn, Hàn Việt, hoặc Anh Hàn, Hàn Anh, ...
   keepActive = 0;
+  loopNum: number[];
   constructor(
     private route: ActivatedRoute,
     private searchService: SearchService,
     private lang: LanguageService,
     private common: CommonService
-  ) { }
+  ) {
+    this.loopNum = this.common.getRange(0, 3);
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.total = undefined;
@@ -75,5 +78,4 @@ export class WordResultComponent implements OnInit {
       }
     );
   }
-
 }

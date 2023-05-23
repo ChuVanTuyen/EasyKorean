@@ -1,0 +1,36 @@
+<div class="row example">
+    <ng-container *ngIf="total !== 0; else ngNotFound">
+        <ng-container *ngIf="total">
+            <div class="col-md-6 example-box" *ngFor="let res of result">
+                <div class="example-box-wrap">
+                    <div class="content">
+                        <p class="text-title">{{res.e}}</p>
+                        <p class="txt-pronounce">[ {{res.p_e}} ]</p>
+                        <p class="text-mean">{{res.p_m}}</p>
+                    </div>
+                    <div class="volumn">
+                        <img src="assets/images/icon/ic_volume.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 show-more" (click)="onShowMore()" *ngIf="(page*20 < total)">
+                {{'Show-more' | translate}}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="total === undefined">
+            <div class="col-md-6" *ngFor="let number of loopNum">
+                <div class="content">
+                    <app-loader [style]="'line medium-width'"></app-loader>
+                    <app-loader [style]="'line max-width'"></app-loader>
+                    <app-loader [style]="'line max-width'"></app-loader>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-template #ngNotFound>
+        <div class="not-found">
+            <img src="../../../../assets/images/icon/ic_no_result.png" alt="">
+            <p>{{'No-result' | translate}}</p>
+        </div>
+    </ng-template>
+</div>

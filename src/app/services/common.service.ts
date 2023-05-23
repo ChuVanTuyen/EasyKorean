@@ -36,4 +36,12 @@ export class CommonService {
     }
     return false;
   }
+
+  getRange(start: number, end: number): number[] {// tạo mảng number
+    const range = [];
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  }
 }

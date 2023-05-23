@@ -45,7 +45,7 @@
                 <span class="warning-form" *ngIf="!user.password && checkSubmit">
                     {{'The-password-field' | translate}}
                 </span>
-                <span class="warning-form" *ngIf="user.password.length < 6 && checkSubmit">
+                <span class="warning-form" *ngIf="user.password && user.password.length < 6 && checkSubmit">
                     {{'password-6-characters' | translate}}
                 </span>
             </div>

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { GeneralModule } from 'src/app/modules/general.module';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,7 +24,7 @@ const routes: Routes = [
     TranslateModule.forChild({
       extend: true
     }),
-    FormsModule
+    GeneralModule
   ]
 })
 export class UserModule { }

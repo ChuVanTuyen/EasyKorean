@@ -1,0 +1,106 @@
+<div class="row word-result">
+    <ng-container *ngIf="total !== 0">
+        <div class="col-md-3">
+            <h6 class="title">{{'Result' | translate}}</h6>
+            <ng-container *ngIf="total !== undefined && total > 0">
+                <div class="word-box pointer" [class.active]="keepActive===0" (click)="changeActive(0)">
+                    <h5 class=" word-key">
+                        {{result[0].word}}
+                    </h5>
+                    <p>
+                        {{result[0].short_mean}}
+                    </p>
+                </div>
+                <div class="title" *ngIf="total > 1">{{'Suggested-words' | translate}}</div>
+                <ng-container *ngFor="let res of result; index as idx">
+                    <div class="word-box pointer" [class.active]="keepActive===idx" *ngIf="idx > 0"
+                        (click)="changeActive(idx)">
+                        <div class="word-key">
+                            {{res.word}}
+                            <span *ngIf="res.romaja">[ {{res.romaja}} ]</span>
+                        </div>
+                        <div class="mean">
+                            {{res.short_mean}}
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="show-more" (click)="onShowMore()" *ngIf="(page*20 < total)">
+                    {{'Show-more' | translate}}
+                </div>
+            </ng-container>
+            <ng-container *ngIf="total === undefined">
+                <div class="word-box" *ngFor="let number of loopNum">
+                    <app-loader [style]="'line max-width'"></app-loader>
+                    <app-loader [style]="'line max-width'"></app-loader>
+                    <app-loader [style]="'line max-width'"></app-loader>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="col-md-9">
+            <h6 class="title">{{'Detail-word' | translate}}</h6>
+            <div class="word-box detail" *ngIf="total !== undefined && total > 0">
+                <div class="top">
+                    <div class="top-main word-key">
+                        {{result[keepActive].word}}
+                    </div>
+                    <div class="top-sub"></div>
+                </div>
+                <div class="bottom">
+                    <div class="box-compound">
+                        <div class="word-kinds">
+                            {{'The-kinds' | translate}}: {{result[keepActive].content[0].kind}}
+                            <div class="content-child" *ngFor="let mean of result[keepActive].content[0].means">
+                                <div class="box-mean">
+                                    <div class="icon-dot">
+                                        <img src="assets/images/icon/ic_full-stop.png" alt="">
+                                    </div>
+                                    <span>{{mean.mean}}</span>
+                                </div>
+                                <div class="explain" *ngIf="mean.explain">
+                                    <p class="explain-notran">{{mean.explain}}</p>
+                                    <p>{{mean.m_explain}}</p>
+                                </div>
+                                <div class="box-example" *ngIf="mean.content_examples">
+                                    <span>{{'Eg' | translate}}:</span>
+                                    <div class="item-example" *ngFor="let content of mean.content_examples">
+                                        <img class="pointer" src="assets/images/icon/ic_volume.png" alt="">
+                                        <div class="item-example-content">
+                                            <p>{{content.e}}</p>
+                                            <p class="item-example-tran">{{content.m}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="related" *ngIf="result[keepActive].snym">
+                                <p>{{'Related-word' | translate}}:</p>
+                                <p>
+                                    <span *ngFor="let related_content of result[keepActive].snym[0].content">
+                                        {{related_content}},
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-source"></div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="total === undefined">
+                <div class="word-box">
+                    <ng-container *ngFor="let number of loopNum">
+                        <app-loader [style]="'line medium-width'"></app-loader>
+                        <app-loader [style]="'line max-width'"></app-loader>
+                        <app-loader [style]="'line large-width'"></app-loader><br>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="total === 0">
+        <div class="word-box not-found">
+            <img src="../../../../assets/images/icon/ic_no_result.png" alt="">
+            <p>{{'No-result' | translate}}</p>
+        </div>
+    </ng-container>
+</div>
