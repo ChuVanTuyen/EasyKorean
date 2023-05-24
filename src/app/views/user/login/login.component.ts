@@ -35,14 +35,16 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private lang: LanguageService,
     private common: CommonService,
-    private broadCaster: BroadcastService
+    private broadCaster: BroadcastService,
+    private localStorage: LocalStorageService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
     if (this.isBrowser) {
-
+      this.user.email = this.localStorage.getItem('user').email;
+      this.user.password = this.localStorage.getItem('user').password;
     }
   }
 
