@@ -16,6 +16,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class HeaderComponent {
   keepActive: Language | undefined; // đang hiển thị ngôn ngữ nào
   isBrowser = false; // kiểm tra có đang chạy trong môi trường browser hay không
+  menuMbShow = false; // ẩn hiện menu ở thiết bị màn hình bé
   user = {
     id: NaN,
     email: '',
@@ -25,7 +26,7 @@ export class HeaderComponent {
     device_id: '',
     remember_token: ''
   };
-  logoutOrRegister = "";
+  logoutOrRegister = ""; // thông báo khi đăng xuất hoặc đăng ký
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
@@ -55,6 +56,7 @@ export class HeaderComponent {
   setLanguge(lang: Language): void {
     this.keepActive = lang;
     this.lang.setLang(this.keepActive.code);// thay đổi ngôn ngữ
+    this.menuMbShow = false;// ẩn menu nếu ở thiết bị màn hình nhỏ
   }
 
   handleLogout(): void {// đăng xuất
@@ -80,5 +82,9 @@ export class HeaderComponent {
         this.localStorage.setItem('user', this.user);
       }
     })
+  }
+
+  toggleMenuMb(show: boolean): void {// ẩn hiện menu ở các thiêt bị màn hình nhỏ
+    this.menuMbShow = show;
   }
 }
