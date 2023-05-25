@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UrlService {
+  urlMain = "https://api.todaikorean.com/api/";
   urlSearch = "https://search.jaemy.net/search";// api tìm kiếm
-  urlRegister = "https://api.todaikorean.com/api/auth/register";// api đăng ký
-  urlLogin = "https://api.todaikorean.com/api/auth/login";// api đăng ký
-  urlLogout = "https://api.todaikorean.com/api/auth/logout";
 }

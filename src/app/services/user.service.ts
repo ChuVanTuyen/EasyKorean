@@ -12,20 +12,20 @@ export class UserService {
   constructor(private http: HttpClient, private url: UrlService) { }
 
   register(dataSend: DataRegister): Observable<any> {
-    return this.http.post<any>(this.url.urlRegister, dataSend)
+    return this.http.post<any>(this.url.urlMain + "auth/register", dataSend)
       .pipe(
         catchError((err) => { return of(err) }),
       );
   }
 
   login(dataSend: DataLogin): Observable<any> {
-    return this.http.post<any>(this.url.urlLogin, dataSend)
+    return this.http.post<any>(this.url.urlMain + "auth/login", dataSend)
       .pipe(
         catchError((err) => { return of(err) }),
       );
   }
   logout(dataSend: DataLogout, headers: any): Observable<any> {
-    return this.http.post<any>(this.url.urlLogout, dataSend, headers)
+    return this.http.post<any>(this.url.urlMain + "auth/logout", dataSend, headers)
       .pipe(
         catchError((err) => { return of(err) }),
       )

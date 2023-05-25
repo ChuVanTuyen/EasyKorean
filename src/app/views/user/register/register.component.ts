@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
     agree: true,
   };
   checkEmailForm = true; // kiểm tra mail đã đúng định dạng hay chưa
-  res: any;
   checkSubmit = false;
+  signingUp = false;
+  resStatus: number | undefined;
   constructor(
     private apiUser: UserService,
     private lang: LanguageService,
@@ -37,6 +38,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(userData: UserFormData): void {
+    if (this.signingUp) {
+      return;
+    }
+    this.signingUp = true;
     this.user = userData;
     this.checkSubmit = true;
     this.validateEmail(this.user.email);
@@ -48,23 +53,15 @@ export class RegisterComponent implements OnInit {
       password: this.user.password,
       language: this.lang.lang
     }).subscribe(res => {
-      this.res = res;
+      this.signingUp = false;
+      this.resStatus = res.status;
       if (res.status === 1) {
         this.broadCaster.broadcast('user', { // gửi dữ liệu đến component header
-          user: {
-            id: res.id,
-            email: this.user.email,
-            name: res.name,
-            password: this.user.password,
-            image: res.image,
-            device_id: this.makeid(8),
-            remember_token: res.remember_token
-          },
+          user: res,
           LogoutOrRegister: "Registered",
         })
         this.router.navigate([this.lang.lang]);
       }
-      console.log(res);
     });
   }
 

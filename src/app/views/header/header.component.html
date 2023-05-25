@@ -20,7 +20,7 @@
                                 d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
                         </svg>
                         <div class="set-lang">
-                            <ng-container *ngFor="let lang of lang.langs">
+                            <ng-container *ngFor="let lang of lang.LANGUAGES">
                                 <div class="lang" (click)="setLanguge(lang)">
                                     <img src="{{lang.img}}" alt="">
                                     <span>{{lang.name | translate}}</span>
@@ -36,7 +36,7 @@
                     </ng-container>
                 </div>
 
-                <ng-container *ngIf="!user.name">
+                <ng-container *ngIf="!user?.name">
                     <div class="login">
                         <a routerLink="{{keepActive?.code}}/user/login/" routerLinkActive="active">
                             {{'Login' | translate}}
@@ -48,20 +48,20 @@
                         </a>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="user.name">
+                <ng-container *ngIf="user?.name">
                     <div class="user">
                         <div class="user-image">
-                            <ng-container *ngIf="user.image; else ngUserImage">
-                                <img src="{{user.image}}" alt="">
+                            <ng-container *ngIf="user?.image; else ngUserImage">
+                                <img src="{{user?.image}}" alt="">
                             </ng-container>
                             <ng-template #ngUserImage>
                                 <img src="assets/images/icon/ic_user.png" alt="">
                             </ng-template>
                         </div>
-                        <span>{{user.name}}</span>
+                        <span>{{user?.name}}</span>
                         <div class="user-menu">
-                            <div class="user-item">{{'Thông tin cá nhân' | translate}}</div>
-                            <div class="user-item" (click)="handleLogout()">{{'Đăng xuất' | translate}}</div>
+                            <div class="user-item">{{'Profile' | translate}}</div>
+                            <div class="user-item" (click)="handleLogout()">{{'Logout' | translate}}</div>
                         </div>
                     </div>
                 </ng-container>
@@ -80,7 +80,7 @@
                     <div class="mb-menu-top">
                         <div class="mb-logo">easy<span>korean</span></div>
                         <div class="mb-btn-group">
-                            <ng-container *ngIf="!user.name; else ngUserNameAvatar">
+                            <ng-container *ngIf="!user?.name; else ngUserNameAvatar">
                                 <a class="mb-login" routerLink="{{keepActive?.code}}/user/login/"
                                     (click)="toggleMenuMb(false)">
                                     {{'Login' | translate}}
@@ -92,7 +92,7 @@
                             </ng-container>
                             <ng-template #ngUserNameAvatar>
                                 <a class="text-dark" (click)="toggleMenuMb(false)">
-                                    {{user.name}}
+                                    {{user?.name}}
                                 </a>
                                 <a class="mb-register" (click)="handleLogout()">
                                     {{'Logout' | translate}}
@@ -111,7 +111,7 @@
                                     d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
                             </svg>
                             <div class="set-lang">
-                                <ng-container *ngFor="let lang of lang.langs">
+                                <ng-container *ngFor="let lang of lang.LANGUAGES">
                                     <div class="lang" (click)="setLanguge(lang)">
                                         <img src="{{lang.img}}" alt="">
                                         <span>{{lang.name | translate}}</span>

@@ -16,11 +16,22 @@ export interface DataLogout {
 }
 
 export interface User {
-    id: number,
+    apple_token: null,
+    apple_user: null,
+    created_at: string,
+    device_id: null,
     email: string,
+    id: number | undefined,
+    image: null,
+    is_premium: string,
+    language: string | null,
+    level_topik: null,
     name: string,
-    password: string,
-    image: string,
-    device_id: string,
-    remember_token: string
+    premium_expired: string,
+    provider: null,
+    provider_id: null,
+    remember_token: string | null,
+    status: number | null,
+    updated_at: string | null
+
 }

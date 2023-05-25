@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LanguageService {
-  langs = [
+  LANGUAGES = [
     { id: 0, name: 'Vietnamese', img: "assets/images/flag/vietnam.png", code: 'vi' },
     { id: 1, name: 'English', img: "assets/images/flag/united-kingdom.png", code: 'en' }
   ];
@@ -35,14 +35,14 @@ export class LanguageService {
   }
 
   getCurrentLang(): Language | undefined {
-    return this.langs.find(item => item.code === this.lang);
+    return this.LANGUAGES.find(item => item.code === this.lang);
   }
 
   getLangs(): Array<Language> {
-    return this.langs;
+    return this.LANGUAGES;
   }
 
   checkLang(lang: string): boolean {
-    return this.langs.some(item => item.code === lang);
+    return this.LANGUAGES.some(item => item.code === lang);
   }
 }

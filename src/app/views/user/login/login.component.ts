@@ -8,11 +8,11 @@ import { BroadcastService } from 'src/app/services/broadcast.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonService } from 'src/app/services/common.service';
 
-interface DataFormUser {
-  email: string,
-  password: string,
-  agree: boolean
-}
+// interface DataFormUser {
+//   email: string,
+//   password: string,
+//   agree: boolean
+// }
 
 @Component({
   selector: 'app-login',
@@ -22,13 +22,14 @@ interface DataFormUser {
 export class LoginComponent implements OnInit {
   res: any;
   checkSubmit = false;
+  isBrowser = false;
+  checkEmailForm = true;
+  LoggingIn = false;
   user = {
     email: '',
     password: '',
     agree: false,
   };
-  isBrowser = false;
-  checkEmailForm = true;
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     private apiUser: UserService,
@@ -43,14 +44,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.user.email = this.localStorage.getItem('user').email;
-      this.user.password = this.localStorage.getItem('user').password;
+      // this.user.email = this.localStorage.getItem('user').email;
+      // this.user.password = this.localStorage.getItem('user').password;
     }
   }
 
   handleLogin(): void {
-    let email = '';
-    let password = '';
+    if (this.LoggingIn) {
+      return;
+    }
+    this.LoggingIn = true;
     this.checkSubmit = true;
     if (!this.checkEmailForm) {
       return;
@@ -65,21 +68,11 @@ export class LoginComponent implements OnInit {
       device_id: did
     }).subscribe(res => {
       this.res = res;
+      this.LoggingIn = false;
       if (res.status === 1) {
-        if (this.user.agree) {// lưu tài khoản vè mật khẩu
-          email = this.user.email;
-          password = this.user.password;
-        }
+        console.log(res);
         this.broadCaster.broadcast('user', {
-          user: {
-            id: res.id,
-            email: email,
-            name: res.name,
-            password: password,
-            image: res.image,
-            device_id: did,
-            remember_token: res.remember_token
-          },
+          user: res,
           logoutOrRegister: ""
         })
         this.router.navigate([this.lang.lang]);
