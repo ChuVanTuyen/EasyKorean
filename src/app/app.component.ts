@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
       if (this.lang.checkLang(lang)) {
         this.lang.setLang(lang);
       } else {
-        lang = navigator.language; // vi
+        lang = navigator.language.slice(0, 2); // vi
         this.lang.setLang(lang);
       }
     }
