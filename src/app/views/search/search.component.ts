@@ -17,6 +17,8 @@ export class SearchComponent implements OnInit {
   }
   search = '';// nội dung tra cứu
   ngOnInit(): void {
+
+    //Khi người dùng copy link
     let search = this.router.url.split('/')[4];
     if (search) {
       this.search = decodeURIComponent(decodeURIComponent(search));
@@ -24,7 +26,7 @@ export class SearchComponent implements OnInit {
       this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
     }
   }
-  handleTypeSearch(type: boolean) {
+  handleTypeSearch(type: boolean) {// thay đổi tìm kiếm word <=> example
     this.check.typeSearch = type;
     if (this.search) {
       this.check.submitted = true;
@@ -32,7 +34,7 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  handleChangeSearch(event: Event): void {
+  handleChangeSearch(event: Event): void { // khi user tìm kiếm từ khác
     this.search = (event.target as HTMLInputElement).value.trim();// lấy giá trị người dung nhập vào ô tra cứu
     if (!this.search) {
       this.router.navigate(['./'], { relativeTo: this.route });
@@ -41,8 +43,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.check.submitted = true;
     if (this.search) {
+      this.check.submitted = true;
       this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
     }
   }
