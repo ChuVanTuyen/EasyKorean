@@ -56,7 +56,7 @@ export class HeaderComponent {
     }
     this.LoggingOut = true;
     this.UserService.logout(
-      {},
+      { type: 'all' },
       {
         headers: {
           authorization: this.user?.remember_token
