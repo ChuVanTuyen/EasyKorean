@@ -8,12 +8,6 @@ import { BroadcastService } from 'src/app/services/broadcast.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonService } from 'src/app/services/common.service';
 
-// interface DataFormUser {
-//   email: string,
-//   password: string,
-//   agree: boolean
-// }
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,23 +24,20 @@ export class LoginComponent implements OnInit {
     password: '',
     agree: false,
   };
+  // autoComplete = 'off';
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     private apiUser: UserService,
     private router: Router,
     private lang: LanguageService,
     private common: CommonService,
-    private broadCaster: BroadcastService,
-    private localStorage: LocalStorageService
+    private broadCaster: BroadcastService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      // this.user.email = this.localStorage.getItem('user').email;
-      // this.user.password = this.localStorage.getItem('user').password;
-    }
+    if (this.isBrowser) { }
   }
 
   handleLogin(): void {
@@ -70,7 +61,6 @@ export class LoginComponent implements OnInit {
       this.res = res;
       this.LoggingIn = false;
       if (res.status === 1) {
-        console.log(res);
         this.broadCaster.broadcast('user', {
           user: res,
           logoutOrRegister: ""
