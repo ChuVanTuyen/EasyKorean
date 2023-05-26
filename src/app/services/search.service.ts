@@ -27,7 +27,6 @@ export class SearchService {
                 .pipe(
                     catchError((err) => { return throwError('Lỗi rồi!') }),
                     map((data) => {
-                        console.log('call running')
                         this.cacheDictionary.setData(strDataKey, data);// lưu data vào cache
                         return data;
                     })
