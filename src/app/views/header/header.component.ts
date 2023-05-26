@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, flatMap } from 'rxjs';
 import { Language } from 'src/app/data-structure/Common';
 import { User } from 'src/app/data-structure/User';
 import { UserService } from 'src/app/services/user.service';
@@ -19,6 +19,7 @@ export class HeaderComponent {
   menuMbShow = false; // ẩn hiện menu ở thiết bị màn hình bé
   user: User | undefined;
   logoutOrRegister = ""; // thông báo khi đăng xuất hoặc đăng ký
+  LoggingOut = false;
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
@@ -31,7 +32,6 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      this.localStorage.clear();
       this.keepActive = this.lang.getCurrentLang(); // lấy ngôn ngữ mặc định để hiển thị lần đầu
       if (this.localStorage.getItem('user')) {
         this.user = this.localStorage.getItem('user');
@@ -51,6 +51,10 @@ export class HeaderComponent {
   }
 
   handleLogout(): void {// đăng xuất
+    if (this.LoggingOut) {
+      return;
+    }
+    this.LoggingOut = true;
     this.UserService.logout(
       {},
       {
@@ -59,6 +63,7 @@ export class HeaderComponent {
         }
       }
     ).subscribe((data) => {
+      this.LoggingOut = false;
       if (data.status === 0) {
         console.error("Đăng xuất thất bại");
       } else {
