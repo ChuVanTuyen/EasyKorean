@@ -2,11 +2,11 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from 'src/app/services/user.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonService } from 'src/app/services/common.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,20 +14,19 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  res: any;
+  resStatus: number | undefined;
+  dataLogin: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    agree: new FormControl(false)
+  })
   checkSubmit = false;
   isBrowser = false;
   checkEmailForm = true;
-  LoggingIn = false;
-  user = {
-    email: '',
-    password: '',
-    agree: false,
-  };
-  // autoComplete = 'off';
+  loggingIn = false;
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
-    private apiUser: UserService,
+    private userService: UserService,
     private router: Router,
     private lang: LanguageService,
     private common: CommonService,
@@ -37,29 +36,26 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) { }
   }
 
   handleLogin(): void {
-    if (this.LoggingIn) {
+    if (this.loggingIn) {
       return;
     }
-    this.LoggingIn = true;
+    this.loggingIn = true;
     this.checkSubmit = true;
-    if (!this.checkEmailForm) {
+    if (this.dataLogin.controls['email'].errors
+      && this.dataLogin.controls['password'].errors
+    ) {
       return;
     }
-    if (!this.user.password) {
-      return;
-    }
-    let did = this.common.makeid(8);// tạo device_id
-    this.apiUser.login({
-      email: this.user.email,
-      password: this.user.password,
-      device_id: did
+    this.userService.login({
+      email: this.dataLogin.controls['email'].value.trim(),
+      password: this.dataLogin.controls['password'].value,
+      device_id: ''
     }).subscribe(res => {
-      this.res = res;
-      this.LoggingIn = false;
+      this.resStatus = res;
+      this.loggingIn = false;
       if (res.status === 1) {
         this.broadCaster.broadcast('user', {
           user: res,
@@ -70,23 +66,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onFocusout(type: number): void {
-    //type = 0 là focus input email, 1 focus input password
-    if (type === 0) {
-      this.checkEmailForm = this.common.validateEmail(this.user.email);
-    }
-
-  }
-
-  onFocus(type: number): void {// xóa thông bảo tk hoặc mk 
-    //type = 0 là focus input email, 1 focus input password
-    if (type === 0) {
-      this.checkEmailForm = true;
-    }
-    if (this.res) {
-      this.res.status = 1;
+  onKeyUp():void{
+    if(this.resStatus){
+      this.resStatus = 1;
     }
   }
-
-
 }

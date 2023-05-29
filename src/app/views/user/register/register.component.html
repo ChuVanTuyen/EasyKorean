@@ -1,77 +1,84 @@
 <div class="register">
-  <div class="rounded border border-light-subtle wrap">
+    <div class="rounded border border-light-subtle wrap">
 
-    <p class="m-0">{{'Quick-login-with' | translate}}</p>
-    <div class="login-app">
-      <div class="rounded border border-light-subtle px-3 py-2 me-3 mt-3 facebook">
-        <img src="assets/images/logo/lg_facebook.png" alt="">
-        <span>&nbsp;&nbsp;&nbsp;{{'Login-with' | translate}} Facebook</span>
-      </div>
-      <div class="rounded border border-light-subtle px-3 py-2 mt-3 google">
-        <img src="assets/images/logo/lg_search.png" alt="">
-        <span>&nbsp;&nbsp;&nbsp;{{'Login-with' | translate}} Google</span>
-      </div>
+        <p class="m-0">{{'Quick-login-with' | translate}}</p>
+        <div class="login-app">
+            <div class="rounded border border-light-subtle px-3 py-2 me-3 mt-3 facebook">
+                <img src="assets/images/logo/lg_facebook.png" alt="">
+                <span>&nbsp;&nbsp;&nbsp;{{'Login-with' | translate}} Facebook</span>
+            </div>
+            <div class="rounded border border-light-subtle px-3 py-2 mt-3 google">
+                <img src="assets/images/logo/lg_search.png" alt="">
+                <span>&nbsp;&nbsp;&nbsp;{{'Login-with' | translate}} Google</span>
+            </div>
+        </div>
+
+        <div class="or">{{'Or'| translate}}</div>
+
+        <form class="email-register" (ngSubmit)="onRegister()" [formGroup]="dataRegister">
+            <div class="form-group mb-2">
+                <div class="form-control">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                            d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+                    </svg>
+                    <input type="text" formControlName="registerEmail" placeholder="{{'enter-your-email' | translate}}" autocomplete="false">
+                </div>
+                <ng-container *ngIf="checkSubmit && dataRegister.controls['registerEmail'].errors">
+                    <span class="warning-form" *ngIf="dataRegister.controls['registerEmail'].errors['required']">{{'The-email-field' | translate}}</span>
+                    <span class="warning-form" *ngIf="dataRegister.controls['registerEmail'].errors['email']">{{'email-must-valid-email' | translate}}</span>
+                </ng-container>
+            </div>
+
+            <div class="form-group mb-2">
+                <div class="form-control">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                            d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+                    </svg>
+                    <input type="password" formControlName="registerPassword" placeholder="{{'password' | translate}}" autocomplete="false">
+                </div>
+                <ng-container *ngIf="checkSubmit && dataRegister.controls['registerPassword'].errors">
+                    <span class="warning-form" *ngIf="dataRegister.controls['registerPassword'].errors['required']">{{'The-password-field' | translate}}</span>
+                    <span class="warning-form" *ngIf="dataRegister.controls['registerPassword'].errors['minlength']">{{'password-6-characters' | translate}}</span>
+                </ng-container>
+            </div>
+
+            <div class="form-group mb-2">
+                <div class="form-control">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                            d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+                    </svg>
+                    <input type="password" formControlName="rePassword" placeholder="{{'re-enter-your-password' | translate}}" autocomplete="false">
+                </div>
+
+                <ng-container *ngIf="checkSubmit">
+                    <ng-container *ngIf="dataRegister.controls['rePassword'].errors; else ngRePass">
+                        <span class="warning-form" *ngIf="dataRegister.controls['rePassword'].errors['required']">{{'The-confirm-password-field' | translate}}</span>
+                        <span class="warning-form" *ngIf="dataRegister.controls['rePassword'].errors['minlength']">{{'Match-password' |translate}}</span>
+                    </ng-container>
+                    <ng-template #ngRePass>
+                        <span class="warning-form" *ngIf="dataRegister.controls['rePassword'].value !== dataRegister.controls['registerPassword'].value">
+                            {{'Match-password' |translate}}
+                        </span>
+                    </ng-template>
+                </ng-container>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" formControlName="agree">
+                <label class="form-check-label" for="flexCheckChecked">
+                    {{'agree-EasyKorean.Firstly' | translate}}
+                    <a href="#" class="terms">{{'terms-of-use' | translate}}</a>
+                    {{'agree-EasyKorean.Last' | translate}}
+                </label>
+            </div>
+            <ng-container *ngIf="checkSubmit">
+                <span class="warning-form" *ngIf="!dataRegister.controls['agree'].value">{{'You-agreed-terms-of-use' | translate}}</span>
+            </ng-container>
+            <span class="warning-form" *ngIf="resStatus === 0">{{'email-registered' | translate}}</span>
+            <button type="submit" class="btn btn-primary mt-3 btn-submit">{{'Register' | translate}}</button>
+        </form>
     </div>
-
-    <div class="or">{{'Or'| translate}}</div>
-
-    <form class="email-register" (ngSubmit)="onRegister(ngFormRegister.value)" #ngFormRegister="ngForm">
-      <div class="form-group mb-2">
-        <div class="form-control">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-              d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
-          </svg>
-          <input type="text" name="email" ngModel placeholder="{{'enter-your-email' | translate}}" autocomplete="on"
-            (keyup)="removeWarnForm($event, 0)">
-        </div>
-        <span class="warning-form" *ngIf="!user.email && checkSubmit">{{'The-email-field' | translate}}</span>
-        <span class="warning-form" *ngIf="user.email && !checkEmailForm && checkSubmit">{{'email-must-valid-email' |
-          translate}}</span>
-      </div>
-
-      <div class="form-group mb-2">
-        <div class="form-control">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path
-              d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
-          </svg>
-          <input type="password" name="password" ngModel placeholder="{{'password' | translate}}" autocomplete="on"
-            (keyup)="removeWarnForm($event, 1)">
-        </div>
-        <span class="warning-form" *ngIf="!user.password && checkSubmit">{{'The-password-field' | translate}}</span>
-        <span class="warning-form" *ngIf="user.password && user.password.length < 6 && checkSubmit">
-          {{'password-6-characters' | translate}}</span>
-      </div>
-
-      <div class="form-group mb-2">
-        <div class="form-control">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path
-              d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
-          </svg>
-          <input type="password" name="rePassword" ngModel placeholder="{{'re-enter-your-password' | translate}}"
-            autocomplete="on" (keyup)="removeWarnForm($event, 2)">
-        </div>
-        <span class="warning-form" *ngIf="!user.rePassword && checkSubmit">{{'The-confirm-password-field' |
-          translate}}</span>
-        <span class="warning-form" *ngIf="user.rePassword && !(user.rePassword === user.password) && checkSubmit">
-          {{'Match-password' |translate}}
-        </span>
-      </div>
-
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="agree" ngModel (click)="removeWarnForm($event, 3)">
-        <label class="form-check-label" for="flexCheckChecked">
-          {{'agree-EasyKorean.Firstly' | translate}}
-          <a href="#" class="terms">{{'terms-of-use' | translate}}</a>
-          {{'agree-EasyKorean.Last' | translate}}
-        </label>
-      </div>
-      <span class="warning-form" *ngIf="!user.agree">{{'You-agreed-terms-of-use' | translate}}</span>
-      <span class="warning-form" *ngIf="resStatus === 0">
-        {{'email-registered' | translate}}</span>
-      <button type="submit" class="btn btn-primary mt-3 btn-submit">{{'Register' | translate}}</button>
-    </form>
-  </div>
 </div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../views/loader/loader.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LoaderComponent } from '../views/loader/loader.component';
   ],
   exports: [
     FormsModule,
-    LoaderComponent
+    LoaderComponent,
+    ReactiveFormsModule
   ]
 })
 export class GeneralModule { }

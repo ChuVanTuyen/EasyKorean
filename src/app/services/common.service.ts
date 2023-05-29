@@ -7,16 +7,6 @@ export class CommonService {
 
   constructor() { }
 
-  makeid(length: number): string {// tạo chuỗi id ngẫu nhiên
-    let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < length; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  }
-
   validateEmail(str: string): boolean {// kiểm tra chuỗi có phải là email hay không
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (str.match(mailformat)) {

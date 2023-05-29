@@ -24,6 +24,8 @@ export class SearchComponent implements OnInit {
       this.search = decodeURIComponent(decodeURIComponent(search));
       this.check.submitted = true;
       this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
+    }else{
+      this.search = '';
     }
   }
   handleTypeSearch(type: boolean) {// thay đổi tìm kiếm word <=> example

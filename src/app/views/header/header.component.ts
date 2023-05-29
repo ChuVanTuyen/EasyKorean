@@ -19,7 +19,7 @@ export class HeaderComponent {
   menuMbShow = false; // ẩn hiện menu ở thiết bị màn hình bé
   user: User | undefined;
   logoutOrRegister = ""; // thông báo khi đăng xuất hoặc đăng ký
-  LoggingOut = false;
+  loggingOut = false;
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     public lang: LanguageService,
@@ -51,10 +51,10 @@ export class HeaderComponent {
   }
 
   handleLogout(): void {// đăng xuất
-    if (this.LoggingOut) {
+    if (this.loggingOut) {
       return;
     }
-    this.LoggingOut = true;
+    this.loggingOut = true;
     this.UserService.logout(
       { type: 'all' },
       {
@@ -63,7 +63,7 @@ export class HeaderComponent {
         }
       }
     ).subscribe((data) => {
-      this.LoggingOut = false;
+      this.loggingOut = false;
       if (data.status === 0) {
         console.error("Đăng xuất thất bại");
       } else {
@@ -76,5 +76,9 @@ export class HeaderComponent {
 
   toggleMenuMb(show: boolean): void {// ẩn hiện menu ở các thiêt bị màn hình nhỏ
     this.menuMbShow = show;
+  }
+
+  refresh(): void {// reload lại trang
+    window.location.reload();
   }
 }
