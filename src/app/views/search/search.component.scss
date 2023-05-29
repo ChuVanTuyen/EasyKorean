@@ -2,10 +2,10 @@
     padding-top: 60px;
     background-color: #f7f7f7;
     min-height: 62vh;
+    position: relative;
     .wrap{
         padding-top: 16px;
     }
-
     .search-input{
         input{
             border-top-left-radius: 999px;
@@ -25,6 +25,15 @@
                 fill: white;
             }
         }
+    }
+
+    .search-clear{
+        position: absolute;
+        top: 50%;
+        right: 80px;
+        transform: translateY(-50%);
+        z-index: 9;
+        cursor: pointer;
     }
 
     .btn-groups{

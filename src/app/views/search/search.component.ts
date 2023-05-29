@@ -50,4 +50,10 @@ export class SearchComponent implements OnInit {
       this.router.navigate([this.check.typeSearch ? 'word' : 'example', this.search], { relativeTo: this.route });
     }
   }
+
+  clearSearch(): void{
+    this.search = '';
+    this.router.navigate(['./'], { relativeTo: this.route });
+    this.check.submitted = false;
+  }
 }

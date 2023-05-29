@@ -2,8 +2,8 @@
     <div class="container wrap">
         <form (ngSubmit)="onSubmit()" #ngForm>
             <div class="input-group mb-3 search-input">
-                <input type="text" class="form-control" value="{{search}}" (keyup)="handleChangeSearch($event)"
-                    placeholder="{{'Search' | translate}}">
+                <input type="text" class="form-control" value="{{search}}" (keyup)="handleChangeSearch($event)" placeholder="{{'Search' | translate}}">
+                <div class="search-clear" *ngIf="search" (click)="clearSearch()">&#x2715;</div>
                 <div class="input-group-append">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -15,8 +15,7 @@
             </div>
         </form>
         <div class="btn-groups">
-            <button type="button" class="btn py-1 me-2" [class.active]="check.typeSearch"
-                (click)="handleTypeSearch(true)">
+            <button type="button" class="btn py-1 me-2" [class.active]="check.typeSearch" (click)="handleTypeSearch(true)">
                 {{'Word' | translate}}
             </button>
             <button type="button" class="btn py-1" [class.active]="!check.typeSearch" (click)="handleTypeSearch(false)">
