@@ -7,7 +7,7 @@ export interface Language {
 
 export interface DataSearch {
     dict: string,
-    limit: 20,
+    limit: number,
     page: number,
     text: string,
     type: string
